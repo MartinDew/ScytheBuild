@@ -6,7 +6,7 @@ using ScytheBuild.ToolChains;
 
 Console.WriteLine("Hello, World!");
 
-var toolchain = new ClangCL();
+var toolchain = new MSVC();
 
 var compileCommand = toolchain.GetCompileCommand("cxx");
 // Console.WriteLine(toolchain.GetIncludeString());
