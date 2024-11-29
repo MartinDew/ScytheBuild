@@ -6,7 +6,7 @@ using ScytheBuild.ToolChains;
 
 Console.WriteLine("Hello, World!");
 
-var toolchain = new MSVC();
+var toolchain = new ClangCL();
 
 var compileCommand = toolchain.GetCompileCommand("cxx");
 // Console.WriteLine(toolchain.GetIncludeString());
@@ -18,11 +18,6 @@ var filePath =  "main.cpp";
 var includes = string.Join(";", toolchain.DefaultIncludes);
 Environment.SetEnvironmentVariable("INCLUDE", includes);
 Environment.SetEnvironmentVariable("LIB", string.Join(";", toolchain.DefaultLibraries));
-
-Console.WriteLine(includes);
-
-// print default libs
-Console.WriteLine(string.Join(";", toolchain.DefaultLibraries));
 
 var compileArgs = new [] {filePath, "/EHsc", "/Fe:main.exe", "/MDd"};
 // Console.WriteLine(toolchain.GetIncludeString());
