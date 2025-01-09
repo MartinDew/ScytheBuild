@@ -24,10 +24,12 @@ var parser = new Parser();
 var moduleUnits = parser.ParseProject(path);
 var buildOrder = parser.GetCompilationOrder();
 
-foreach (var file in buildOrder)
-{
-    Console.WriteLine(file);   
-}
+// foreach (var file in buildOrder)
+// {
+//     Console.WriteLine(file);   
+// }
+
+parser.PrintBuildTree();
 
 stopwatch.Stop();
 

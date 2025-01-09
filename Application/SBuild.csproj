@@ -16,10 +16,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Folder Include="Flow\" />
-    </ItemGroup>
-    
-    <ItemGroup>
       <ProjectReference Include="..\Parsers\CppParser\CppParser.csproj" />
     </ItemGroup>
 

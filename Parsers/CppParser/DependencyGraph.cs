@@ -2,48 +2,47 @@ using System.Collections.Generic;
 
 namespace CppParser;
 
+using Models;
+
 class BuildLayer
 {
-    public HashSet<string> Files { get; } = new();
-    public HashSet<string> CompletedDependencies { get; } = new();
+    public HashSet<ModuleUnit> Units { get; } = new();
+    public HashSet<ModuleUnit> CompletedDependencies { get; } = new();
 }
 
 class DependencyGraph
 {
-    private Dictionary<string, HashSet<string>> _graph = new();
-    private Dictionary<string, HashSet<string>> _reverseDependencies = new();
+    private Dictionary<ModuleUnit, HashSet<ModuleUnit>> _graph = new();
+    private Dictionary<ModuleUnit, HashSet<ModuleUnit>> _reverseDependencies = new();
 
-    public void AddNode(string file, IEnumerable<string> dependencies)
+    public void AddNode(ModuleUnit unit, IEnumerable<ModuleUnit> dependencies)
     {
-        _graph[file] = new HashSet<string>(dependencies);
+        _graph[unit] = new HashSet<ModuleUnit>(dependencies);
         foreach (var dep in dependencies)
         {
             if (!_reverseDependencies.ContainsKey(dep))
-                _reverseDependencies[dep] = new HashSet<string>();
-            _reverseDependencies[dep].Add(file);
+                _reverseDependencies[dep] = new HashSet<ModuleUnit>();
+            _reverseDependencies[dep].Add(unit);
         }
     }
 
     public List<BuildLayer> GetBuildLayers()
     {
         var layers = new List<BuildLayer>();
-        var completed = new HashSet<string>();
+        var completed = new HashSet<ModuleUnit>();
         
         while (_graph.Count > 0)
         {
             var currentLayer = new BuildLayer();
-            
-            // Find all nodes with no remaining dependencies
             var availableNodes = _graph.Where(kvp => 
                 !kvp.Value.Except(completed).Any()).Select(kvp => kvp.Key).ToList();
 
             if (!availableNodes.Any())
                 throw new Exception("Circular dependency detected");
 
-            currentLayer.Files.UnionWith(availableNodes);
+            currentLayer.Units.UnionWith(availableNodes);
             currentLayer.CompletedDependencies.UnionWith(completed);
             
-            // Remove processed nodes from graph
             foreach (var node in availableNodes)
             {
                 _graph.Remove(node);

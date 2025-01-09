@@ -4,6 +4,8 @@ using System.Text.RegularExpressions;
 
 namespace CppParser;
 
+using Models;
+
 enum ModuleType
 {
     InterfaceUnit, // Primary modules
@@ -12,16 +14,6 @@ enum ModuleType
     HeaderUnit, // header files that are imported. We do not need to parse them.
     InternalPartition, // header files that are imported. We do not need to parse them.
     Unknown,
-}
-
-class ModuleUnit
-{
-    public string FilePath { get; set; } = "";
-    public string ModuleName { get; set; } = "";
-    public string? PartitionName { get; set; } = null;
-    public ModuleType Type { get; set; }
-    public List<string> Dependencies { get; set; } = new();
-    public bool HasInterfaceUnit { get; set; }
 }
 
 class Parser
@@ -223,19 +215,10 @@ class Parser
     HashSet<string> visited = new HashSet<string>();
     private Stack<string> circularDependencyStack = new Stack<string>();
 
-    public List<string> GetCompilationOrder()
+    public List<ModuleUnit> GetCompilationOrder()
     {
         var layers = GetBuildLayers();
-        var order = new List<string>();
-    
-        // Flatten the layers into a linear order while maintaining dependencies
-        foreach (var layer in layers)
-        {
-            // Add all files from current layer in any order since they can be built in parallel
-            order.AddRange(layer.Files);
-        }
-    
-        return order;
+        return layers.SelectMany(layer => layer.Units).ToList();
     }
 
     public void PrintModuleInfo()
@@ -260,14 +243,43 @@ class Parser
     public List<BuildLayer> GetBuildLayers()
     {
         var graph = new DependencyGraph();
-    
+        // Create a lookup dictionary for module units using their unique identifiers
         foreach (var unit in _moduleUnits)
         {
-            graph.AddNode(unit.Value.FilePath, unit.Value.Dependencies
+            var dependencies = unit.Value.Dependencies
                 .Where(dep => _moduleUnits.ContainsKey(dep))
-                .Select(dep => _moduleUnits[dep].FilePath));
+                .Select(dep => _moduleUnits[dep]);
+            
+            graph.AddNode(unit.Value, dependencies);
         }
     
         return graph.GetBuildLayers();
+    }
+    
+    public void PrintBuildTree()
+    {
+        var layers = GetBuildLayers();
+    
+        Console.WriteLine("\nBuild Tree:");
+        for (int i = 0; i < layers.Count; i++)
+        {
+            Console.WriteLine($"\nLayer {i + 1}:");
+            foreach (var unit in layers[i].Units)
+            {
+                Console.WriteLine($"  {unit.FilePath}");
+                if (unit.Dependencies.Any())
+                {
+                    Console.WriteLine("    Dependencies:");
+                    foreach (var dep in unit.Dependencies)
+                    {
+                        var depUnit = _moduleUnits.GetValueOrDefault(dep);
+                        if (depUnit == null)
+                            continue;
+                        
+                        Console.WriteLine($"    └─ {depUnit.FilePath}");
+                    }
+                }
+            }
+        }
     }
 }
