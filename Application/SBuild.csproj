@@ -8,10 +8,19 @@
         <PublishAot>true</PublishAot>
         <InvariantGlobalization>true</InvariantGlobalization>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <RootNamespace>ScytheBuild</RootNamespace>
     </PropertyGroup>
     
     <ItemGroup>
       <PackageReference Include="Microsoft.VisualStudio.Setup.Configuration.Interop" Version="3.10.2154" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Flow\" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Parsers\CppParser\CppParser.csproj" />
     </ItemGroup>
 
 </Project>

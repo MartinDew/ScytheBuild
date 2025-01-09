@@ -17,5 +17,7 @@ public abstract class Configuration
     // Dictionary for compiler options
 
     Configuration(Target target)
-    {}
+    {
+        
+    }
 }

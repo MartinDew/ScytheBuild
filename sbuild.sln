@@ -1,8 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScytheBuild", "Application\ScytheBuild.csproj", "{8CAB46DE-EC6B-4EE4-B88D-39618EDEE27A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBuild", "Application\SBuild.csproj", "{8CAB46DE-EC6B-4EE4-B88D-39618EDEE27A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples", "Samples\Samples.csproj", "{55907F9D-D4AF-4F5A-A53C-335AB4149C84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CppParser", "Parsers\CppParser\CppParser.csproj", "{17649523-9476-4AE9-80A4-F1A4EBDC150C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Parsers", "Parsers", "{1BF4452F-A6E7-45EB-A821-21D67A10F8B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +22,12 @@ Global
 		{55907F9D-D4AF-4F5A-A53C-335AB4149C84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55907F9D-D4AF-4F5A-A53C-335AB4149C84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55907F9D-D4AF-4F5A-A53C-335AB4149C84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17649523-9476-4AE9-80A4-F1A4EBDC150C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17649523-9476-4AE9-80A4-F1A4EBDC150C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17649523-9476-4AE9-80A4-F1A4EBDC150C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17649523-9476-4AE9-80A4-F1A4EBDC150C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{17649523-9476-4AE9-80A4-F1A4EBDC150C} = {1BF4452F-A6E7-45EB-A821-21D67A10F8B4}
 	EndGlobalSection
 EndGlobal
