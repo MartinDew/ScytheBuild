@@ -1,6 +1,6 @@
 ﻿namespace CppParser.Models;
 
-class ModuleUnit
+public class ModuleUnit
 {
     public string FilePath { get; set; } = "";
     public string ModuleName { get; set; } = "";

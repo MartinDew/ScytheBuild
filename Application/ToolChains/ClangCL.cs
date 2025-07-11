@@ -1,9 +1,11 @@
-﻿using ScytheBuild.Common;
+﻿using CppParser.Models;
+using ScytheBuild.Common;
 using ScytheBuild.Platforms;
+using ScytheBuild.ProjectDescriptors;
 
 namespace ScytheBuild.ToolChains;
 
-public class ClangCL : IToolChain
+public class ClangCL : ICxxToolchain
 {
     // Clang-cl depends on msvc includes
     public string MSVCToolchainPath { get; set; } = WindowsUtils.GetLatestMSVCPath();
@@ -39,6 +41,18 @@ public class ClangCL : IToolChain
                 .Concat(WindowsUtils.GetWindowsLibPath()));
             return result;
         }
+    }
+
+    public override string CreateCompileCommand(ModuleUnit unit, Configuration config)
+    {
+        string command = GetCompileCommand("cxx");
+        command += " /c";
+        command += " /I" + string.Join(" /I", DefaultIncludes);
+        command += " /I" + string.Join(" /I", config.Includes);
+        command += " /D" + string.Join(" /D", config.Defines);
+        
+        command += " " + unit.FilePath;
+        return command;
     }
 
     public ClangCL()

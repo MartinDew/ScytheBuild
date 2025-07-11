@@ -1,6 +1,6 @@
 ﻿namespace ScytheBuild.ProjectDescriptors;
 
-[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(AttributeTargets.Constructor, AllowMultiple = false, Inherited = true)]
 public class ConfigurationType : Attribute
 {
     public object[] Flags { get; }
@@ -53,6 +53,21 @@ public class ConfigurationType : Attribute
 
         return true;
     }
+    
+    // With a flag value, matches weather it's there and return weather the two values are equal. If not there, return true.
+    public bool HasFlag<T>(T flag) where T : Enum
+    {
+        if (Flags == null)
+            return true;
+
+        foreach (var f in Flags)
+        {
+            if (f is T t && t.Equals(flag))
+                return true;
+        }
+
+        return false;
+    }
 
     public override string ToString()
     {
@@ -60,5 +75,14 @@ public class ConfigurationType : Attribute
             return "null";
 
         return string.Join(" ", Flags);
+    }
+}
+
+// Marks the default configuration for a project
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+public class DefaultConfiguration : Attribute
+{
+    public DefaultConfiguration()
+    {
     }
 }

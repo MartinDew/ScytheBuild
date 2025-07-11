@@ -6,13 +6,13 @@ namespace CppParser;
 
 using Models;
 
-enum ModuleType
+public enum ModuleType
 {
     InterfaceUnit, // Primary modules
     PartitionInterfaceUnit, // Module partitions
     ImplementationUnit, //  Cpp files
     HeaderUnit, // header files that are imported. We do not need to parse them.
-    InternalPartition, // header files that are imported. We do not need to parse them.
+    InternalPartition, // Implementation unit that is not a partition interface and can be used internally only 
     Unknown,
 }
 
@@ -24,6 +24,7 @@ class Parser
         { ModuleType.InterfaceUnit, [".ixx", ".cppm"] },
         { ModuleType.PartitionInterfaceUnit, [".ixx", ".cppm"] },
         { ModuleType.ImplementationUnit, [".cpp", ".cxx"] },
+        { ModuleType.InternalPartition, [".cpp", ".cxx"]}
     };
 
     private readonly Dictionary<string, ModuleUnit> _moduleUnits = new();

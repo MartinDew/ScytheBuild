@@ -3,7 +3,7 @@ using ScytheBuild.Platforms;
 
 namespace ScytheBuild.ToolChains;
 
-public class MSVC : IToolChain
+public class MSVC : ICxxToolchain
 {
     public override Dictionary<string, string> Compilers { get; set; } = new Dictionary<string, string>
     {

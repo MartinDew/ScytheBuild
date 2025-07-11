@@ -2,7 +2,7 @@
 
 namespace ScytheBuild.ToolChains;
 
-public class Clang : IToolChain
+public class Clang : ICxxToolchain
 {
     public override Dictionary<string, string> Compilers { get; set; } = new Dictionary<string, string>
     {

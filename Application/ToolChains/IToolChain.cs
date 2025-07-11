@@ -1,6 +1,9 @@
-﻿namespace ScytheBuild.ToolChains;
+﻿using ScytheBuild.ProjectDescriptors;
+
+namespace ScytheBuild.ToolChains;
 
 using Common;
+using CppParser.Models;
 
 public abstract class IToolChain
 {
@@ -37,4 +40,13 @@ public abstract class IToolChain
             throw new Exception("Toolchain path cannot be empty");
         ToolchainPath = toolchainPath;
     }
+}
+
+public abstract class ICxxToolchain : IToolChain
+{
+    protected ICxxToolchain(string toolchainPath) : base(toolchainPath)
+    {
+    }
+
+    public abstract string CreateCompileCommand(ModuleUnit unit, Configuration config);
 }
