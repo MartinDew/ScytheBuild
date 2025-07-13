@@ -1,7 +1,7 @@
-﻿// using ScytheBuild.Common;
-// using ScytheBuild.ToolChains;
+﻿// using Barn.Common;
+// using Barn.ToolChains;
 //
-// namespace ScytheBuild.Files;
+// namespace Barn.Files;
 //
 // public static partial class Options
 // {

@@ -9,7 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 
-namespace ScytheBuild.Utils;
+namespace Barn.Utils;
 
 public class DynamicCodeLoader
 {

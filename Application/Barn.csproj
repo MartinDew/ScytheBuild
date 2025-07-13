@@ -8,7 +8,7 @@
         <PublishAot>true</PublishAot>
         <InvariantGlobalization>true</InvariantGlobalization>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-        <RootNamespace>ScytheBuild</RootNamespace>
+        <RootNamespace>Barn</RootNamespace>
     </PropertyGroup>
     
     <ItemGroup>
@@ -18,6 +18,10 @@
     
     <ItemGroup>
       <ProjectReference Include="..\Parsers\CppParser\CppParser.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Languages\Dotnet\" />
     </ItemGroup>
 
 </Project>

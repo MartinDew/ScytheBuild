@@ -1,8 +1,7 @@
 ﻿
 using System.Runtime.InteropServices;
-using ScytheBuild.Common;
 
-namespace ScytheBuild.Files;
+namespace Barn.Files;
 
 public interface File
 {

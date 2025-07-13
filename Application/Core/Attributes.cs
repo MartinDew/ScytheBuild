@@ -1,4 +1,6 @@
-﻿namespace ScytheBuild.ProjectDescriptors;
+﻿using System.Diagnostics;
+
+namespace Barn.Core;
 
 [AttributeUsage(AttributeTargets.Constructor, AllowMultiple = false, Inherited = true)]
 public class ConfigurationType : Attribute
@@ -14,7 +16,7 @@ public class ConfigurationType : Attribute
     {
         Flags = flags;
     }
-
+    
     public bool HasSameFlags(ConfigurationType other)
     {
         if (ReferenceEquals(null, other))
@@ -82,7 +84,53 @@ public class ConfigurationType : Attribute
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
 public class DefaultConfiguration : Attribute
 {
-    public DefaultConfiguration()
+    private string DefaultConfigName; 
+    public DefaultConfiguration(string value)
     {
+        DefaultConfigName = value;
+    }
+}
+
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+public class LangType : Attribute
+{
+    public Type _internalType;
+
+    // Only applies if langType inherits from Language
+    public LangType(Type langType)
+    {
+        _internalType = langType;
+    }
+
+    public bool Matches<T>()
+    {
+        return _internalType == typeof(T);
+    }
+}
+
+[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
+public class DefaultAttribute : Attribute
+{
+    static uint GetDefaultValue<TEnum>()
+    {
+        if (!typeof(TEnum).IsEnum)
+            throw new ArgumentException("TEnum must be an enumerated type");
+
+        var enumType = typeof(TEnum);
+        var fields = enumType.GetFields();
+        uint defaultValue = 0;
+        
+        foreach (var field in fields)
+        {
+            var attribute = GetCustomAttribute(field, typeof(DefaultAttribute));
+            if (attribute != null)
+            {
+                if (field.IsLiteral)
+                {
+                    return Convert.ToUInt32(field.GetRawConstantValue());
+                }
+            }
+        }
+        return defaultValue;
     }
 }

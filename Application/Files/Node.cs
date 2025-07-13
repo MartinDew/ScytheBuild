@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace ScytheBuild.Files;
+namespace Barn.Files;
 using System.IO;
-// A c++ node to compile. Will establish dependencies based on  
+// A compilation node that represents a file in the project
 public class Node
 {
     public string Name { get; private set; }
@@ -13,7 +13,7 @@ public class Node
     // the files that depend on this file
     public List<Node> Dependents { get; internal set; }
 
-    public uint FileType { get; internal set; }
+    internal uint NodeType = 0; 
     
     // Constructor
     public Node(File file)

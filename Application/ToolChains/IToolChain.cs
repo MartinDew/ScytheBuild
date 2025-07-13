@@ -1,8 +1,9 @@
-﻿using ScytheBuild.ProjectDescriptors;
+﻿using Barn.Core;
+using Barn.Languages.Cpp;
+using Barn.Utils;
 
-namespace ScytheBuild.ToolChains;
+namespace Barn.ToolChains;
 
-using Common;
 using CppParser.Models;
 
 public abstract class IToolChain
@@ -48,5 +49,5 @@ public abstract class ICxxToolchain : IToolChain
     {
     }
 
-    public abstract string CreateCompileCommand(ModuleUnit unit, Configuration config);
+    public abstract string CreateCompileCommand(ModuleUnit unit, CppConfiguration config);
 }

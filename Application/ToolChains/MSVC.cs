@@ -1,7 +1,6 @@
-﻿using ScytheBuild.Common;
-using ScytheBuild.Platforms;
+﻿using Barn.Utils;
 
-namespace ScytheBuild.ToolChains;
+namespace Barn.ToolChains;
 
 public class MSVC : ICxxToolchain
 {

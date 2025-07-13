@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBuild", "Application\SBuild.csproj", "{8CAB46DE-EC6B-4EE4-B88D-39618EDEE27A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barn", "Application\Barn.csproj", "{8CAB46DE-EC6B-4EE4-B88D-39618EDEE27A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples", "Samples\Samples.csproj", "{55907F9D-D4AF-4F5A-A53C-335AB4149C84}"
 EndProject

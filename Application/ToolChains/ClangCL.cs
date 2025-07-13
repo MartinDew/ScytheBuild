@@ -1,9 +1,9 @@
 ﻿using CppParser.Models;
-using ScytheBuild.Common;
-using ScytheBuild.Platforms;
-using ScytheBuild.ProjectDescriptors;
+using Barn.Core;
+using Barn.Languages.Cpp;
+using Barn.Utils;
 
-namespace ScytheBuild.ToolChains;
+namespace Barn.ToolChains;
 
 public class ClangCL : ICxxToolchain
 {
@@ -43,12 +43,17 @@ public class ClangCL : ICxxToolchain
         }
     }
 
-    public override string CreateCompileCommand(ModuleUnit unit, Configuration config)
+    public override string CreateCompileCommand(ModuleUnit unit, CppConfiguration config)
     {
+        if (config == null)
+        {
+            throw new ArgumentException("Configuration must be of type CppConfiguration", nameof(config));
+        }
+        
         string command = GetCompileCommand("cxx");
         command += " /c";
         command += " /I" + string.Join(" /I", DefaultIncludes);
-        command += " /I" + string.Join(" /I", config.Includes);
+        command += " /I" + string.Join(" /I", config.IncludeDirectories);
         command += " /D" + string.Join(" /D", config.Defines);
         
         command += " " + unit.FilePath;

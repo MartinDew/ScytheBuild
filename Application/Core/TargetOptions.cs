@@ -1,4 +1,4 @@
-﻿namespace ScytheBuild.ProjectDescriptors;
+﻿namespace Barn.Core;
 
 [Flags]
 enum Optimisation : uint
@@ -12,11 +12,11 @@ enum Platform : uint
 {
     Windows = 1 << 0,
     Linux = 1 << 1,
-    // MacOS = 1 << 2,
+    MacOS = 1 << 2,
 }
 
 [Flags]
-public enum BinaryType
+public enum OutputType
 {
     Executable = 1,
     StaticLibrary = 2,
@@ -24,5 +24,4 @@ public enum BinaryType
     // Test = 8,
     // Benchmark = 16,
     // Example = 32,
-    All = 63
 }

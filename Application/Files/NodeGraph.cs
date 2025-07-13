@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace ScytheBuild.Files;
+namespace Barn.Files;
 
 // a node tree is a tree data structure that consists of nodes in a parent/child relationship
 public class NodeGraph

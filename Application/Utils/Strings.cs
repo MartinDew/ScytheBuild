@@ -1,4 +1,4 @@
-﻿namespace ScytheBuild.Common;
+﻿namespace Barn.Utils;
 
 public class Strings : List<String>
 {

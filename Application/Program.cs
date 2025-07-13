@@ -1,9 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Diagnostics;
-using ScytheBuild.Platforms;
-using ScytheBuild.ToolChains;
-using ScytheBuild.Files;
+using Barn.ToolChains;
+using Barn.Files;
 
 // var toolchain = new ClangCL();
 //

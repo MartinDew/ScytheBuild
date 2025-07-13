@@ -1,9 +1,8 @@
-﻿namespace ScytheBuild.Platforms;
-
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Setup.Configuration;
 using Microsoft.Win32;
-using Common;
+
+namespace Barn.Utils;
 
 public class WindowsUtils
 {
